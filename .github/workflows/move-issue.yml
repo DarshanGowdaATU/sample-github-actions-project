@@ -1,0 +1,15 @@
+name: Move Issue to Project Column
+
+on:
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  move:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Move issue to "In Progress" column
+        run: |
+          gh project card move --project "Task Management Board" --column "In Progress" --issue ${{ github.event.issue.number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
